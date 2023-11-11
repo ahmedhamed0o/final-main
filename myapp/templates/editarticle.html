@@ -1,0 +1,198 @@
+{% extends "layout.html" %} {% block title %} Edit article {% endblock %}
+{%block body %}
+<div
+  class="max-w-md mx-auto overflow-hidden md:max-w-6xl my-4 px-5 project-font"
+>
+  <h1
+    class="text-4xl md:text-5xl capitalize my-5 project-font font-bold text-center"
+  >
+    Edit {{article.title}}
+  </h1>
+  <form action="{% url 'editArticle' article_id=article.id %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-6">
+      <label
+        for="articleTitle"
+        class="block mb-2 text-sm font-medium text-black dark:text-black"
+        >Title <sup class="text-red-300 font-bold text-md">*</sup></label
+      >
+      <input
+        name="articleTitle"
+        value="{{article.title}}"
+        required
+        type="text"
+        id="articleTitle"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Title"
+        required
+      />
+    </div>
+    <div class="mb-6">
+      <label
+        for="articleImage"
+        class="block mb-2 text-sm font-medium text-black dark:text-black"
+        >Image URL <sup class="text-red-300 font-bold text-md">*</sup></label
+      >
+      <input
+        name="articleImage"
+        value="{{article.image}}"
+        required
+        type="text"
+        id="articleImage"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="URL"
+        required
+      />
+    </div>
+    <div class="grid gap-6 mb-6 md:grid-cols-3">
+      <div>
+        <label
+          for="articleTime"
+          class="block mb-2 text-sm font-medium text-black dark:text-black"
+          >Time <sup class="text-red-300 font-bold text-md">*</sup></label
+        >
+        <input
+          name="articleTime"
+          value="{{article.articleTime|time:'h:i:s'}}"
+          required
+          type="time"
+          id="articleTime"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Time"
+          required
+        />
+      </div>
+      <div>
+        <label
+          for="articleDate"
+          class="block mb-2 text-sm font-medium text-black dark:text-black"
+          >Date <sup class="text-red-300 font-bold text-md">*</sup></label
+        >
+        <input
+          name="articleDate"
+          value="{{article.articleDate|date:'Y-m-d'}}"
+          required
+          type="date"
+          id="articleDate"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Date"
+          required
+        />
+      </div>
+      <div>
+        <label
+          for="articleLocation"
+          class="block mb-2 text-sm font-medium text-black dark:text-black"
+          >Location <sup class="text-red-300 font-bold text-md">*</sup></label
+        >
+        <input
+          name="articleLocation"
+          value="{{article.location}}"
+          type="text"
+          id="articleLocation"
+          required
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Location"
+          required
+        />
+      </div>
+    </div>
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <div>
+        <label
+          for="articleUpperContent"
+          class="block mb-2 text-sm font-medium text-black dark:text-black"
+          >Upper content
+          <sup class="text-red-300 font-bold text-md">*</sup></label
+        >
+        <textarea
+          name="articleUpperContent"
+          id="articleUpperContent"
+          required
+          rows="4"
+          class="resize-none md:resize-y block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Write your thoughts here..."
+        >
+{{article.upperContent}}</textarea
+        >
+      </div>
+      <div>
+        <label
+          for="articleUnderContent"
+          class="block mb-2 text-sm font-medium text-black dark:text-black"
+          >Under content
+          <sup class="text-red-300 font-bold text-md">*</sup></label
+        >
+        <textarea
+          name="articleUnderContent"
+          id="articleUnderContent"
+          required
+          rows="4"
+          class="resize-none md:resize-y block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Write your thoughts here..."
+        >
+{{article.underContent}}</textarea
+        >
+      </div>
+    </div>
+    <div class="mb-6">
+      <label
+        for="articleSmallContent"
+        class="block mb-2 text-sm font-medium text-black dark:text-black"
+        >Small content
+        <sup class="text-red-300 font-bold text-md">*</sup></label
+      >
+      <textarea
+        name="articleSmallContent"
+        id="articleSmallContent"
+        required
+        rows="2"
+        class="resize-none md:resize-y block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Write your thoughts here..."
+      >
+{{article.content}}</textarea
+      >
+    </div>
+    <div class="mb-6">
+      <label
+        for="articleCategory"
+        class="block mb-2 text-sm font-medium text-black dark:text-black"
+        >Category <sup class="text-red-300 font-bold text-md">*</sup></label
+      >
+      <select
+        name="articleCategory"
+        id="articleCategory"
+        class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option selected>{{article.category}}</option>
+        {% for cat in cats%} {% if cat != article.category %}
+        <option value="{{cat.title}}" class="capitalize">{{cat.title}}</option>
+        {% endif %} {% endfor %}
+      </select>
+    </div>
+    <div class="mb-6">
+      <label
+        for="articleSecondImage"
+        class="block mb-2 text-sm font-medium text-black dark:text-black"
+        >Second Image URL</label
+      >
+      <input
+        name="articleSecondImage"
+        value="{{article.secondImage}}"
+        type="secondImage"
+        id="articleSecondImage"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white shadow-md dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="URL"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Edit
+    </button>
+  </form>
+</div>
+
+{% endblock %}

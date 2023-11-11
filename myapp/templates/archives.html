@@ -1,0 +1,64 @@
+{% extends "layout.html" %} {% load static %}
+
+{% block title %} Archive Page {% endblock %}
+
+{% load social_share %}
+{% block body %}
+
+<div id="loader">{% include "loadingPage.html" %}</div>
+<div id="openloader">
+  <div class="contain">
+    <h1 class="md:text-5xl text-4xl uppercase mb-5 project-font font-bold">
+      Archives
+    </h1>
+    
+    {% for article in articles %}
+
+    <div
+      class="max-w-md mx-auto bg-white rounded-3xl shadow-md overflow-hidden md:max-w-6xl my-4"
+    >
+      <div class="md:flex">
+        <div class="px-9 py-10">
+          <div
+            class="uppercase tracking-wide text-sm text-[#1A8CF7] font-semibold"
+          >
+            Article #{{article.id}} --- {{ article.articleDate | date:"M d"}}
+          </div>
+          <div
+            class="uppercase tracking-wide flex row text-md text-dark mt-4 font-semibold"
+          >
+            {{article.title}}
+            <h4 class="mx-5 text-gray-500 font-medium italic capitalize">
+              {{article.category}}
+            </h4>
+          </div>
+          <p class="mt-2 text-slate-500">{{article.content}}</p>
+          <a
+            href="{% url 'article' article.id %}"
+            class="block mt-5 text-lg leading-tight font-medium text-[#1A8CF7] hover:underline"
+            >more about Title Potato</a
+          >
+        </div>
+        <div class="md:shrink-0">
+          <img
+            class="h-48 w-full object-cover md:h-full md:w-96"
+            src="{{article.image}}"
+            alt="Modern building architecture"
+          />
+        </div>
+      </div>
+    </div>
+
+    {% empty %}
+    <div class="text-2xl md:text-3xl my-32 font-bold text-red-600">
+      No Archives
+    </div>
+    {% endfor %}
+    <br />
+    <br />
+    {% include "pagination.html" %}
+  </div>
+
+  {% include "footer.html" %}
+</div>
+{% endblock %}

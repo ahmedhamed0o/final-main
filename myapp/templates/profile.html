@@ -1,0 +1,94 @@
+  {% extends "layout.html" %} 
+
+
+    {% load static %}
+    {% block title %} Profile  {% endblock %}
+    {% block body %}
+    
+    <div id="loader">{% include "loadingPage.html" %}</div>
+    <div id="openloader">
+      <section>
+        <div class="flex justify-center md:my-20 my-20 m-5 items-center">
+        <div class="w-full bg-white rounded-3xl shadow dark:border md:mt-0 sm:max-w-5xl xl:p-0 dark:bg-white dark:border-[#1A8CF7] shadow-lg">
+            <div class="p-6 space-x-4 md:space-x-6 sm:p-8 flex flex-col md:flex-row">
+              <div class="flex justify-center">
+                    <div class="h-56 w-56 bg-gray-600 rounded-full mt-6 bg-cover bg-center bg-no-repeat" style="background-image: url('../media/{{user.picture}}');">
+                      </div>
+                    </div>
+                    
+                <div class="hidden md:block md:max-h-full my-6 md:w-1 max-w-full md:h-auto h-1 bg-[#1A8CF7] rounded-full"></div>
+                <div class="space-y-4">
+                    <div class="text-center text-red-400 my-5">
+                    {{message}}
+                  </div>
+                  <h1 class="text-xl text-gray-900 font-bold text-center md:text-left">
+                    {{ user.first_name}} {{user.last_name}}
+                  </h1>
+                  <div class="block w-full h-1 bg-[#1A8CF7] rounded-full"></div>
+                  <div class="block">
+                    <label for="username" class="text-lg font-bold  	">Username : </label>
+                    <div class="flex items-center mx-2">
+                      <h1 id="username" class="text-md text-gray-900 text-center md:text-left">
+                        @{{ user.username}}
+                      </h1>
+                      <a href="{% url 'editProfile' %}" class="mx-5 text-sm text-[#1A8cf7] font-bold transition hover:scale-110 ">Edit</a>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <label for="username" class="text-lg font-bold  	">Email Address: </label>
+                    <div class="flex items-center mx-2">
+                      <h1 id="username" class="text-md text-gray-900 text-center md:text-left">
+                        {{ user.email}}
+                      </h1>
+                      <a href="{% url 'editProfile' %}" class="mx-5 text-sm text-[#1A8cf7] font-bold transition hover:scale-110 ">Edit</a>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+            </div>
+            <div class="p-6 flex items-center flex-col space-y-5">
+              <h1 class="text-2xl font-bold">Subscriptions</h1>
+              <div class="relative overflow-x-auto shadow-md rounded-lg">
+                <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="pl-6 py-3">
+                                ID
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Category Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Unsubscribe
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for sub in user.categories.all %}
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row" class="pl-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{sub.pk}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ sub.title }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="{% url 'unsubscribe' sub.pk %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Unsubscribe</a>
+                            </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        
+        </div>
+        
+      </section>
+      
+    </div>
+    
+    {% endblock %}
+    

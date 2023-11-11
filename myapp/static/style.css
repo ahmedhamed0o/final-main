@@ -1,0 +1,205 @@
+:root{
+  --main-color: #409ff7;
+  --dark-color: #191518;
+  --bg-color: #F6F9FF;
+  --white-color: #ffffff;
+  --gray-color: #3c3c3b ;
+}
+.project-font{
+  font-family: 'Biennale';
+}
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  font-size: 95%;
+}
+@keyframes shower {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+body {
+  background-color: var(--bg-color); 
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.4;
+  color: var(--text-color);
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+  
+}
+
+.contain{
+  display: flex;
+  flex-direction: column;
+  margin-top: 65px;
+  align-items: center;
+}
+span{
+  color: var(--main-color);
+  font-family: arial;
+  font-weight: bold;
+}
+
+.image-shadow{
+  box-shadow: 0px 0px 14px -5px rgb(0, 0, 0);
+  -webkit-box-shadow: 0px 0px 14px -5px rgba(0, 0, 0);
+  -moz-box-shadow: 0px 0px 14px -5px rgba(0, 0, 0);
+}
+.icons{
+  display: flex;
+  flex-direction: row;
+}
+
+#loader{
+  transition: 10s ease;
+}
+#openloader{
+  visibility: hidden;
+}
+
+#newavatar{
+  /* background-image: url('https://marketplace.canva.com/EAFauoQSZtY/1/0/1600w/canva-brown-mascot-lion-free-logo-qJptouniZ0A.jpg'); */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+button{
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  transition: background 0.1s linear, border-color 0.1s linear, color 0.1s linear;
+}
+header span{
+  font-size: 21px;
+  font-weight: 600;
+}
+header .close, .icons a{
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+} 
+header .close{
+  color: #878787;
+  font-size: 17px;
+  background: #f3f3f3;
+  height: 33px;
+  width: 33px;
+  cursor: pointer;
+}
+header .close:hover{
+  background: #ebedf9;
+}
+.popup .content{
+  margin: 20px 0;
+}
+.popup .icons{
+  margin: 15px 0 20px 0;
+}
+.content p{
+  font-size: 16px;
+}
+.content .icons a{
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.icons a i{
+  transition: transform 0.3s ease-in-out;
+}
+.icons a:nth-child(1){
+  color: var(--main-color);
+  border-color: #b7d4fb;
+}
+.icons a:nth-child(1):hover{
+  background: var(--main-color);
+}
+.icons a:nth-child(2){
+  color: var(--main-color);
+  border-color: #b6e7fc;
+}
+.icons a:nth-child(2):hover{
+  background: var(--main-color);
+}
+.icons a:nth-child(3){
+  color: var(--main-color);
+  border-color: #f5bccf;
+}
+.icons a:nth-child(3):hover{
+  background: var(--main-color);
+}
+.icons a:nth-child(4){
+  color: var(--main-color);
+  border-color: #bef4d2;
+}
+.icons a:nth-child(4):hover{
+  background: var(--main-color);
+}
+.icons a:nth-child(5){
+  color: var(--main-color);
+  border-color: #b3e6ff;
+}
+.icons a:nth-child(5):hover{
+  background: var(--main-color);
+}
+.icons a:hover{
+  color: #fff;
+  border-color: transparent;
+}
+.icons a:hover i{
+  transform: scale(1.2);
+}
+.content .field{
+  margin: 12px 0 -5px 0;
+  height: 45px;
+  border-radius: 4px;
+  padding: 0 5px;
+  border: 1px solid #757171;
+}
+.field.active{
+  border-color: #7d2ae8;
+}
+.field i{
+  width: 50px;
+  font-size: 18px;
+  text-align: center;
+}
+.field.active i{
+  color: #7d2ae8;
+}
+.field input{
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+.field button{
+  color: #fff;
+  padding: 5px 18px;
+  background: var(--main-color);
+  transition: .3s ease;
+}
+.field button:hover{
+  background: #2797ff;
+}

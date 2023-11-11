@@ -1,0 +1,355 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Hub News{% endblock %}</title>
+
+    <link
+      href="https://db.onlinewebfonts.com/c/beba489cd0b5d0000a2ebb0d0ae86913?family=FSP+DEMO+-+Biennale+Bold"
+      rel="stylesheet"
+    />
+    <link
+      href="https://db.onlinewebfonts.com/c/ab115b4a1db57541d7c9c9e39db76c56?family=Biennale"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+      integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <link rel="icon" href="{% static 'brand.png' %}" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link href="{% static 'style.css' %}" rel="stylesheet" />
+
+    {%block head %}{% endblock %}
+  </head>
+
+  <body class="bg-gray-200 project-font">
+    <nav
+      class="bg-black border-gray-200 dark:bg-white dark:border-gray-700 sticky top-0 shadow-md z-50"
+    >
+    
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <a href="#" class="flex items-center">
+          <img
+            src="{% static 'hub.png' %}"
+            class="h-8 mr-3 hidden md:inline"
+            alt="HUB200 Logo"
+          />
+          <img
+            src="{% static 'brand.png' %}"
+            class="h-9 mr-3 inline md:hidden"
+            alt="HUB200 Brand Logo"
+          />
+        </a>
+        <button
+          data-collapse-toggle="navbar-dropdown"
+          type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-dropdown"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-5 h-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
+          {% with request.resolver_match.url_name as url_name %}
+          <ul
+            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-300 rounded-lg bg-white md:flex-row md:space-x-8 md:mt-0 md:border-0"
+          >
+            <li>
+              <a
+                href="{% url 'index' %}"
+                class="block py-2 pl-3 pr-4 text-black rounded md:bg-transparent md:text-black md:p-0 {% if url_name == 'index' %} md:text-blue-600 dark:text-white dark:bg-blue-600 {% endif %} md:dark:bg-transparent"
+                aria-current="page"
+                >Home</a
+              >
+            </li>
+            <li>
+              <button
+                id="dropdownNavbarLink"
+                data-dropdown-toggle="dropdownNavbar"
+                class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-black rounded md:bg-transparent md:text-black md:p-0 {% if url_name == 'category' or url_name == 'categories' %} md:text-blue-600 dark:text-white dark:bg-blue-600 {% endif %} md:dark:hover:text-blue-500 dark:hover:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+              >
+                Categories
+                <svg
+                  class="w-2.5 h-2.5 ml-2.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <!-- Dropdown menu -->
+              <div
+                id="dropdownNavbar"
+                class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-white drop-shadow-md dark:divide-gray-600"
+              >
+                <div class="py-1">
+                  <a
+                    href="{% url 'categories' %}"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-black dark:hover:text-white {% if url_name == 'categories' %} dark:text-blue-500 {% endif %}"
+                    >All Categories</a
+                  >
+                </div>
+                <ul
+                  class="py-2 text-sm text-white dark:text-black"
+                  aria-labelledby="dropdownLargeButton"
+                >
+                  {% for cat in cats %}
+                  <li>
+                    <a
+                      href="{% url 'category' cat.id %}"
+                      class="capitalize block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#1A8CF7] dark:hover:text-white"
+                      >{{ cat.title }}</a
+                    >
+                  </li>
+                  {% endfor %}
+
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a
+                href="{% url 'news' %}"
+                class="block py-2 pl-3 pr-4 text-black rounded md:bg-transparent md:text-black md:p-0 {% if url_name == 'news' %} md:text-blue-600 dark:text-white dark:bg-blue-600 {% endif %} md:dark:bg-transparent"
+                >News</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'archives' %}"
+                class="block py-2 pl-3 pr-4 text-black rounded md:bg-transparent md:text-black md:p-0 {% if url_name == 'archives' %} md:text-blue-600 dark:text-white dark:bg-blue-600 {% endif %} md:dark:bg-transparent"
+                >Archive</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'contactUs' %}"
+                class="block py-2 pl-3 pr-4 text-black rounded md:bg-transparent md:text-black md:p-0 {% if url_name == 'contactUs' %} md:text-blue-600 dark:text-white dark:bg-blue-600 {% endif %} md:dark:bg-transparent"
+                >Contact</a
+              >
+            </li>
+            <hr />
+            <div class="flex md:hidden justify-between items-center my-5 mx-3">
+              {% if user.is_authenticated %}
+              <li>
+                <img
+                  src="{% static 'hub.png' %}"
+                  class="h-7 mr-3 inline md:hidden"
+                  alt="HUB200 Brand Logo"
+                />
+              </li>
+              <button
+                id="dropdownLeftButton"
+                data-dropdown-toggle="dropdownLeft"
+                data-dropdown-placement="right"
+                class="block rounded-full"
+              >
+                <img
+                  src="../media/{{user.picture}}"
+                  class="h-10 rounded-full"
+                  alt="Profile Logo"
+                />
+              </button>
+
+              <div
+                id="dropdownLeft"
+                class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-white drop-shadow-md dark:divide-gray-600"
+              >
+                <div class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900">
+                  <div>{{user.username}}</div>
+                  <div class="font-medium truncate">{{user.email}}</div>
+                </div>
+                <ul
+                  class="py-2 text-sm text-gray-700 dark:text-gray-900"
+                  aria-labelledby="dropdownLeftButton"
+                >
+                  {% if user.roles or user.is_superuser %}
+                  <li>
+                    <a
+                      href="{% url 'dashboard_articles' %}"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#1A8CF7] dark:hover:text-white"
+                      >Admin Dashboard</a
+                    >
+                  </li>
+                  {% endif %}
+                  <li>
+                    <a
+                      href="{% url 'editProfile' %}"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#1A8CF7] dark:hover:text-white"
+                      >Settings</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="{% url 'profile' %}"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#1A8CF7] dark:hover:text-white"
+                      >Profile</a
+                    >
+                  </li>
+                </ul>
+                <div class="py-1">
+                  <a
+                    href="{% url 'signOut' %}"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-black dark:hover:text-white"
+                    >Sign out</a
+                  >
+                </div>
+              </div>
+              {% else %}
+              <a
+                href="{% url 'signIn' %}"
+                class="text-[#1A8CF7] hover:text-white border border-[#1A8CF7] hover:bg-[#187bd8] focus:ring-4 focus:outline-none focus:ring-[#409ff7] font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-1 dark:border-[#187bd8] dark:text-[#187bd8] dark:hover:text-white dark:hover:bg-[#1A8CF7] dark:focus:ring-[#187bd8] cursor-pointer"
+                >Sign in</a
+              >
+              <a
+                href="{% url 'signup' %}"
+                class="text-white bg-[#1A8CF7] hover:bg-[#187bd8] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-1 dark:bg-[#409ff7] dark:hover:bg-[#1A8CF7] focus:outline-none dark:focus:ring-[#187bd8] cursor-pointer"
+                >Sign up</a
+              >
+
+              {% endif %}
+            </div>
+          </ul>
+        
+          {% endwith %}
+
+        </div>
+        <div class="py-1 hidden md:inline">
+          {% if user.is_authenticated %}
+
+          <button
+            id="dropdownNavbarLink"
+            data-dropdown-toggle="LogoDrop"
+            class="flex items-center"
+          >
+            <img
+              src="../media/{{user.picture}}"
+              class="h-10 rounded-full"
+              alt="Hub200 Logo"
+            />
+          </button>
+          <div
+            id="LogoDrop"
+            class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-white drop-shadow-md dark:divide-gray-600"
+          >
+            <div class="px-4 py-3 text-sm text-gray-900 dark:text-gray-900">
+              <div>{{user.username}}</div>
+              <div class="font-medium truncate">{{user.email}}</div>
+            </div>
+            <ul
+              class="py-2 text-sm text-white dark:text-black"
+              aria-labelledby="dropdownLargeButton"
+            >
+              {% if user.roles or user.is_superuser %}
+              <li>
+                <a
+                  href="{% url 'dashboard_articles' %}"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#1A8CF7] dark:hover:text-white"
+                  >Admin Dashboard</a
+                >
+              </li>
+              {% endif %}
+              <li>
+                <a
+                  href="{% url 'profile' %}"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#1A8CF7] dark:hover:text-white"
+                  >Profile</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{% url 'editProfile' %}"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-[#1A8CF7] dark:hover:text-white"
+                  >Settings</a
+                >
+              </li>
+            </ul>
+            <div class="py-1">
+              <a
+                href="{% url 'signOut' %}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-black dark:hover:text-white"
+                >Sign out</a
+              >
+            </div>
+          </div>
+
+          {% else %}
+          <div>
+            <a
+              href="{% url 'signIn' %}"
+              class="text-[#1A8CF7] hover:text-white border border-[#1A8CF7] hover:bg-[#187bd8] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-[#187bd8] dark:text-[#187bd8] dark:hover:text-white dark:hover:bg-[#187bd8] dark:focus:ring-[#187bd8] cursor-pointer"
+              >Sign in</a
+            >
+            <a
+              href="{% url 'signup' %}"
+              class="text-white bg-[#1A8CF7] hover:bg-[#187bd8] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-[#409ff7] dark:hover:bg-[#1A8CF7] focus:outline-none dark:focus:ring-[#187bd8] cursor-pointer"
+              >Sign up</a
+            >
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    {% block body %} {% endblock %}
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
+  <script src="{% static 'main.js' %}"></script>
+</html>

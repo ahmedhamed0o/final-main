@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load social_share %}
+{% block body %}
+
+
+<div id="loader">
+  {% include "loadingPage.html" %}
+</div>
+<div id="openloader">
+  
+<div class="contain">
+  <h1 class="text-5xl uppercase mb-5 project-font font-bold ">All news</h1>
+  <button id="dropdownDefaultButton" data-dropdown-toggle="categoryDrop" class="text-dark bg-white hover:shadow-md focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-5 md:w-4/12 py-4 inline-flex items-center dark:dark" type="button">Categories 
+    <div class="flex flex flex-row justify-end">
+    <svg class="w-2.5 h-2.5 ml-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+  </svg>
+</div></button>
+<!-- Dropdown menu -->
+<div id="categoryDrop" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 md:w-4/12">
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+      
+      {% for cat in cats%} 
+      <li>
+        <a href="{% url 'category' cat.id %}" class="md:w-full block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{cat.title}}</a>
+      </li>
+      {% endfor%} 
+    </ul>
+</div>
+  {% for article in articles%}
+  {% if article.isActive == True %}
+
+<div class="max-w-md mx-auto bg-white rounded-3xl shadow-md overflow-hidden md:max-w-6xl my-4 ">
+  <div class="md:flex">
+
+    <div class="px-9 py-10">
+      <div class="flex flex-row justify-between items-center">
+      <div class="uppercase tracking-wide text-sm text-[#1A8CF7] font-semibold">Article #{{article.id}} --- {{ article.articleDate | date:"M d"}}</div>
+      </div>
+      <div class="flex flex-row justify-between">
+      <div class="uppercase tracking-wide flex row text-md text-dark mt-4 font-semibold">{{article.title}}<h4 class="mx-5 text-gray-500 font-medium italic capitalize">{{article.category}}</h4></div>
+      </div>
+      <p class="mt-2 text-slate-500">{{article.content | linebreaks}}</p>
+      <a href="{% url 'article' article.id %}" class="block mt-5 text-lg leading-tight font-medium text-[#1A8CF7] hover:underline">more about {{article.title}}</a>
+    </div>
+    <div class="md:shrink-0">
+      <img class="h-48 w-full object-cover md:h-full md:w-96" src="{{article.image}}" alt="Modern building architecture">
+    </div>
+  </div>
+</div>
+{% endif %}
+{% empty %}
+<div class="text-3xl my-20 font-bold">No News</div>
+{% endfor %}
+<br>
+<br>
+{% include "pagination.html" %}
+</div>
+
+
+{% include "footer.html" %}
+</div>
+{% endblock %}
+

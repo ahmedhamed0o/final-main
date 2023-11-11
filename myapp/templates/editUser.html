@@ -1,0 +1,62 @@
+{% extends "layout.html" %} {% block title %} {{us.first_name}} {{us.last_name}} {% endblock %}
+{%block body %}
+<div
+  class="max-w-md mx-auto overflow-hidden md:max-w-6xl my-4 px-5 project-font"
+>
+  <h1
+    class="text-4xl md:text-5xl capitalize my-5 project-font font-bold text-center"
+  >
+    Edit {{category.title}}
+  </h1>
+  <form action="" method="POST" class="space-y-3">
+    {% csrf_token %}
+    <div class="grid gap-4 mb-4 sm:grid-cols-2">
+      <div>
+        <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900">First name   <sup class="text-red-300 font-bold text-md">*</sup></label>
+        <input type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white shadow-md  dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="First name" value="{{us.first_name}}" required="">
+    </div>
+    <div>
+        <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900">Last name   <sup class="text-red-300 font-bold text-md">*</sup></label>
+        <input type="text" name="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white shadow-md  dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Last name" value="{{us.last_name}}" required="">
+    </div>
+    <div>
+        <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username   <sup class="text-red-300 font-bold text-md">*</sup></label>
+        <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white shadow-md  dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Username" value="{{us.username}}" required="">
+    </div>
+    <div>
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email address   <sup class="text-red-300 font-bold text-md">*</sup></label>
+      <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white shadow-md  dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email" value="{{us.email}}" required="">
+    </div>
+    </div>
+    <label for="roles" class="block mb-2 text-sm font-medium text-gray-900">Role   <sup class="text-red-300 font-bold text-md">*</sup></label>
+    {% if user.roles.role == 'Admin' or user.roles.role == 'Founder' %}
+      <select id="roles" name="roles" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white shadow-md  dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        <option selected value="{{us.roles}}">{{us.roles}}</option>
+        {% for role in roles %}
+          {% if role != us.roles %}
+            <option value="{{role.role}}">{{role.role}}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    {% else %}
+    <label for="roles" class="block mb-2 text-sm font-medium text-gray-900"><p class="text-red-300 font-bold text-md">you are not admin</p></label>
+      <select disabled id="roles" name="roles" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white shadow-md  dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
+        <option selected value="{{us.roles}}">{{us.roles}}</option>
+        {% for role in roles %}
+          {% if role != us.roles %}
+            <option value="{{role.role}}">{{role.role}}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    {% endif %}
+
+    <button
+      type="submit"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Edit
+    </button>
+  </form>
+</div>
+
+{% endblock %}
